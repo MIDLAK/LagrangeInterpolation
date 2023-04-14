@@ -32,25 +32,29 @@ def draw(func: list[str], interval: list[float]) -> None:
             tmp.append(eval(f))
         y_range.append(tmp)
 
-    # вычисление интерполяций для каждой из функций
     lx_range = []
     k = 0
-    for y in y_copy:
-        lx = lagrange_interpolation(x_copy, y, interval)
-        f_name = func[k]
-        plt.plot(x_range, lx, label=f'L(x) for {f_name}')
-        lx_range.append(lx)
-        k = k + 1
+    for f in func:
+        tmp = []
+        for y in y_copy:
+            lx = lagrange_interpolation(x_copy, y, interval)
+            tmp.append(lx)
+            plt.plot(x_range, lx)
+            k = k + 1
+        lx_range.append(tmp)
 
+    lx_len = len(lx_range[0])
+    y_r_lan = len(y_range[0])
+    print(f"{lx_len}, {y_r_lan}")
 
     # определение максимальных отклонений между графиками
-    # func и их интерполяциями lx_range
     max_deviation = []
     max_current = 0.0
     f_counter = 0
     for f in func:
         for i in range(len(x_range)):
-            deviation = abs(y_range[f_counter][i] - lx_range[f_counter][i])
+            deviation = y_range[f_counter][i] - lx_range[f_counter][i]
+            print(f"dev = {deviation}")
             if max_current < deviation:
                 max_current = deviation
         max_deviation.append(max_current)
@@ -59,17 +63,13 @@ def draw(func: list[str], interval: list[float]) -> None:
         f_counter = f_counter + 1
 
     # отрисовка графиков
-    i = 0
     for y in y_range:
-        plt.plot(x_range, y, label=func[i])
-        i = i + 1
+        plt.plot(x_range, y)
 
     # отрисовка точек
     for f in func:
         for x in interval:
             plt.scatter(x, eval(f), color='#c9007a')
-
-    plt.legend()
     plt.show()
 
     
