@@ -12,7 +12,7 @@ def read_table(filename: str) -> list[list[float]]:
     with open(filename) as file:
         matrix = [list(map(float, row.split())) for row in file.readlines()]
 
-    # приведение матрицы в более удобный вид
+#    приведение матрицы в более удобный вид
 #    function_values = []
 #    for i in range(len(matrix[0])):
 #        function_values.append(FunctionValues(x=matrix[0][i],

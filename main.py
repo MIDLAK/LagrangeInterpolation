@@ -14,11 +14,14 @@ def main():
             function_values = read_table(filename)
             x_values = function_values[0]
             y_values = function_values[1]
-            lagrange_interpolation(x_values, y_values, x_values)
+            x = float(input('x>'))
+            fv = lagrange_interpolation(x_values, y_values, x_values, x)
+            fv = fv[-1]
+            print(f'L({x}) = {fv}')
         case '2':
             x_mas = read_x_values(filename)
             functions = str(input('Функции>')).replace(',', '').split()
-            print(functions)
+            print(f'Введённые функции: {functions}')
             draw(functions, x_mas)
 
 

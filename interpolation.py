@@ -2,10 +2,14 @@ import numpy as np
 
 
 def lagrange_interpolation(x_values: list[float], y_values: list[float],
-                           interval: list[float]) -> list[float]:
-    print(x_values)
-    print(y_values)
+                           interval: list[float], x=None) -> list[float]:
+    print(f'x = {x_values}')
+    print(f'y = {y_values}')
     interval.sort()
+    
+    if x != None:
+        interval.append(x)
+
     x_range = np.arange(interval[0], interval[-1], 0.001)
     n = len(y_values)
     function_values_approx = []
